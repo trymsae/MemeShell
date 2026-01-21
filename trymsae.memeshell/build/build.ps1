@@ -108,6 +108,21 @@ if (-not (Test-Path $releaseDir)) {
 # Create the module manifest
 New-ModuleManifest @moduleManifestParams
 
+## Copy templates folder to release directory if it exists
+$templatesSource = "$($modulePath)\templates"
+$templatesDestination = "$($releaseDir)\templates"
+if (Test-Path $templatesSource) {
+    Write-Output "Copying templates folder to release directory"
+    if (Test-Path $templatesDestination) {
+        Remove-Item -Path $templatesDestination -Recurse -Force
+    }
+    Copy-Item -Path $templatesSource -Destination $templatesDestination -Recurse -Force
+    Write-Output "Templates folder copied successfully"
+}
+else {
+    Write-Output "No templates folder found at: $templatesSource"
+}
+
 Write-Output "Created module manifest with:"
 Write-Output "  - Version: $moduleVersion (from release-please manifest)"
 Write-Output "  - Author: $moduleAuthor"
@@ -118,7 +133,30 @@ Write-Output "  - Aliases to export: $($aliastoexport.Count)"
 ## Export the module
 Write-Output "Exporting psm1 file to: $($modulePath)\release\$($moduleName).psm1"
 if ($moduleData) {
-    Set-Content -Value $moduleData -Path "$($modulePath)\release\$($moduleName).psm1" -Encoding UTF8
+    # Add random import message loader at the beginning
+    $importMessage = @'
+# MemeShell Module Load Message
+$messageFile = Join-Path $PSScriptRoot "templates\load-messages.b64"
+if (Test-Path $messageFile) {
+    try {
+        $base64Content = Get-Content $messageFile -Raw
+        $bytes = [Convert]::FromBase64String($base64Content.Trim())
+        $decodedText = [System.Text.Encoding]::UTF8.GetString($bytes)
+        $messages = $decodedText -split "`r?`n" | Where-Object { $_.Trim() -ne "" }
+        $randomMessage = $messages | Get-Random
+        Write-Host $randomMessage -ForegroundColor Cyan
+    }
+    catch {
+        Write-Host "MemeShell loaded!" -ForegroundColor Cyan
+    }
+}
+
+'@
+
+    # Combine import message with module data
+    $fullModuleContent = $importMessage + ($moduleData -join "`n")
+
+    Set-Content -Value $fullModuleContent -Path "$($modulePath)\release\$($moduleName).psm1" -Encoding UTF8
     Write-Output "Module build completed successfully!"
 }
 else {
