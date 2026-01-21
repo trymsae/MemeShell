@@ -51,9 +51,19 @@ jobs:
 
           $releaseDir = "trymsae.memeshell/release"
           $zipFileName = "$moduleName-$version.zip"
+          $tempDir = "temp-release"
 
-          # Create zip in the workspace root
-          Compress-Archive -Path "$releaseDir/*" -DestinationPath $zipFileName -Force
+          # Create temporary directory with module folder structure
+          New-Item -ItemType Directory -Path "$tempDir/$moduleName" -Force | Out-Null
+
+          # Copy release contents into the module folder
+          Copy-Item -Path "$releaseDir/*" -Destination "$tempDir/$moduleName" -Recurse -Force
+
+          # Create zip with the folder structure
+          Compress-Archive -Path "$tempDir/$moduleName" -DestinationPath $zipFileName -Force
+
+          # Clean up temp directory
+          Remove-Item -Path $tempDir -Recurse -Force
 
           # Verify the file was created
           if (Test-Path $zipFileName) {
