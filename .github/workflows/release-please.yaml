@@ -1,0 +1,75 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs['trymsae.memeshell--release_created'] }}
+      tag_name: ${{ steps.release.outputs['trymsae.memeshell--tag_name'] }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: .github/release-please-config.json
+          manifest-file: release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-and-upload:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Module
+        shell: pwsh
+        run: |
+          .\trymsae.memeshell\build\build.ps1
+
+      - name: Create Release Zip
+        shell: pwsh
+        run: |
+          $moduleName = "trymsae.memeshell"
+          $manifestPath = "release-please-manifest.json"
+          $manifest = Get-Content -Path $manifestPath -Raw | ConvertFrom-Json
+          $version = $manifest.$moduleName
+
+          $releaseDir = "trymsae.memeshell/release"
+          $zipFileName = "$moduleName-$version.zip"
+
+          # Create zip in the workspace root
+          Compress-Archive -Path "$releaseDir/*" -DestinationPath $zipFileName -Force
+
+          # Verify the file was created
+          if (Test-Path $zipFileName) {
+            Write-Output "✓ Created release package: $zipFileName"
+            Write-Output "File size: $((Get-Item $zipFileName).Length) bytes"
+          } else {
+            Write-Error "Failed to create zip file"
+            exit 1
+          }
+
+          # Set output for next step
+          "ZIP_PATH=$zipFileName" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag_name }}
+          files: ${{ env.ZIP_PATH }}
