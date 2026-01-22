@@ -12,13 +12,12 @@ function Disable-MemePrompt {
         [Parameter(Position = 0, Mandatory = $false)]
         [switch]$noBitches
     )
-
     begin {
         # No bitches?
     }
     process {
         if ($script:OriginalPrompt) {
-            # Restore the original prompt function
+            # Restore the original prompt function, boring.
             Set-Content -Path function:global:prompt -Value $script:OriginalPrompt
         }
         else {
