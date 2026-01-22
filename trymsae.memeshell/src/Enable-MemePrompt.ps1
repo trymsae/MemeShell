@@ -218,7 +218,24 @@ function Enable-MemePrompt {
             $color2 = $script:MemeColors | Get-Random
             $Path = (Get-Location).Path
             $Path = $Path -replace "C:\\Users\\$($env:USERNAME)\\", "~\"
-
+            # lmao
+            if ((Get-Random -Minimum 1 -Maximum 20) -eq 1) {
+                try {
+                    $soundsPath = Join-Path $PSScriptRoot "templates\sounds"
+                    if (Test-Path $soundsPath) {
+                        $sounds = Get-ChildItem $soundsPath -Filter "*.wav" -ErrorAction SilentlyContinue
+                        if ($sounds) {
+                            $randomSound = $sounds | Get-Random
+                            $player = New-Object System.Media.SoundPlayer
+                            $player.SoundLocation = $randomSound.FullName
+                            $player.Play()
+                        }
+                    }
+                }
+                catch {
+                    # catch these hands
+                }
+            }
             Write-Host "[" -ForegroundColor $color2 -NoNewline
             Write-Host $prefix -ForegroundColor $color1 -NoNewline
             Write-Host "] - " -ForegroundColor $color2 -NoNewline
