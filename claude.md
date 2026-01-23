@@ -13,6 +13,7 @@ You are working on **MemeShell** - a PowerShell module designed to inject maximu
 
 ## Code Style Expectations
 
+- **Variable naming**: All variables must use camelCase (e.g., `$randomMessage`, `$commitMessages`, `$type`)
 - **Funny comments**: "catch these hands", "lmao", "no bitches?" style comments are encouraged
 - **Meme parameter names**: `-noBitches`, `-allTheBitches`, etc. are on-brand
 - **Easter eggs**: Hidden jokes and references are welcomed
