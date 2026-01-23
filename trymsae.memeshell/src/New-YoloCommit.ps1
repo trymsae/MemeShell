@@ -40,7 +40,7 @@ function New-YoloCommit {
     )
     begin {
         # get the sauce
-        $messagesFile = Join-Path $PSScriptRoot "templates\commit-messages.b64"
+        $messagesFile = Join-Path $PSScriptRoot "templates\texts\commit-messages.b64"
         if (Test-Path $messagesFile) {
             try {
                 $base64Content = Get-Content $messagesFile -Raw
