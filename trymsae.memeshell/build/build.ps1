@@ -144,10 +144,12 @@ if (Test-Path $messageFile) {
         $decodedText = [System.Text.Encoding]::UTF8.GetString($bytes)
         $messages = $decodedText -split "`r?`n" | Where-Object { $_.Trim() -ne "" }
         $randomMessage = $messages | Get-Random
-        Write-Host $randomMessage -ForegroundColor Cyan
+        Write-Host "█▀▄▀█ █▀▀ █▀▄▀█ █▀▀ █▀ █░█ █▀▀ █░░ █░░    █░░ █▀█ ▄▀█ █▀▄ █▀▀ █▀▄" -ForegroundColor Magenta
+        Write-Host "█░▀░█ ██▄ █░▀░█ ██▄ ▄█ █▀█ ██▄ █▄▄ █▄▄    █▄▄ █▄█ █▀█ █▄▀ ██▄ █▄▀" -ForegroundColor Magenta
+        Write-host "$($randomMessage)"
     }
     catch {
-        Write-Host "MemeShell loaded!" -ForegroundColor Cyan
+        Write-host "Catch these hands"
     }
 }
 
