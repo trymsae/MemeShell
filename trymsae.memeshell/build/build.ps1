@@ -136,7 +136,7 @@ if ($moduleData) {
     # Add random import message loader at the beginning
     $importMessage = @'
 # MemeShell Module Load Message
-$messageFile = Join-Path $PSScriptRoot "templates\load-messages.b64"
+$messageFile = Join-Path $PSScriptRoot "templates\texts\load-messages.b64"
 if (Test-Path $messageFile) {
     try {
         $base64Content = Get-Content $messageFile -Raw
