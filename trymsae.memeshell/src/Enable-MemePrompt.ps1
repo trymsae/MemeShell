@@ -219,7 +219,7 @@ function Enable-MemePrompt {
             $Path = (Get-Location).Path
             $Path = $Path -replace "C:\\Users\\$($env:USERNAME)\\", "~\"
             # lmao
-            if ((Get-Random -Minimum 1 -Maximum 20) -eq 1) {
+            if ((Get-Random -Minimum 1 -Maximum 30) -eq 1) {
                 try {
                     $soundsPath = Join-Path $PSScriptRoot "templates\sounds"
                     if (Test-Path $soundsPath) {
