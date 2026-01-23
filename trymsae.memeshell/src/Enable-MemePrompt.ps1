@@ -219,7 +219,7 @@ function Enable-MemePrompt {
             $Path = (Get-Location).Path
             $Path = $Path -replace "C:\\Users\\$($env:USERNAME)\\", "~\"
             # lmao
-            if ((Get-Random -Minimum 1 -Maximum 30) -eq 1) {
+            if ((Get-Random -Minimum 1 -Maximum 25) -eq 1) {
                 try {
                     $soundsPath = Join-Path $PSScriptRoot "templates\sounds"
                     if (Test-Path $soundsPath) {
@@ -236,19 +236,72 @@ function Enable-MemePrompt {
                     # catch these hands
                 }
             }
-            Write-Host "[" -ForegroundColor $color2 -NoNewline
-            Write-Host $prefix -ForegroundColor $color1 -NoNewline
-            Write-Host "] - " -ForegroundColor $color2 -NoNewline
-            Write-Host "(" -ForegroundColor $color2 -NoNewline
-            Write-Host "$($Path)" -NoNewline
-            Write-Host ")" -ForegroundColor $color2 -NoNewline
-            Write-host " >" -NoNewline
+            # Chaos level selection (doing ur mom)
+            $chaosRoll = Get-Random -Minimum 1 -Maximum 11
+            if ($chaosRoll -le 5) {
+                # 50% - Classic format
+                Write-Host "[" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix -ForegroundColor $color1 -NoNewline
+                Write-Host "] - " -ForegroundColor $color2 -NoNewline
+                Write-Host "(" -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-Host ")" -ForegroundColor $color2 -NoNewline
+                Write-host " >" -NoNewline
+            }
+            elseif ($chaosRoll -eq 6) {
+                # ALL CAPS SCREAMING
+                Write-Host "[" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix.ToUpper() -ForegroundColor $color1 -NoNewline
+                Write-Host "] - " -ForegroundColor $color2 -NoNewline
+                Write-Host "(" -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-Host ")" -ForegroundColor $color2 -NoNewline
+                Write-host " >>>" -NoNewline
+            }
+            elseif ($chaosRoll -eq 7) {
+                # dubblare
+                $prefix2 = $script:MemePrompts | Get-Random
+                Write-Host "[[" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix -ForegroundColor $color1 -NoNewline
+                Write-Host "] [" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix2 -ForegroundColor $color1 -NoNewline
+                Write-Host "]] " -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-host " $" -NoNewline
+            }
+            elseif ($chaosRoll -eq 8) {
+                # no brackets?
+                Write-Host $prefix -ForegroundColor $color1 -NoNewline
+                Write-Host " @ " -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-host " #" -NoNewline
+            }
+            elseif ($chaosRoll -eq 9) {
+                # spin it around bby
+                Write-Host "]" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix -ForegroundColor $color1 -NoNewline
+                Write-Host "[ - " -ForegroundColor $color2 -NoNewline
+                Write-Host ")" -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-Host "(" -ForegroundColor $color2 -NoNewline
+                Write-host " <" -NoNewline
+            }
+            else {
+                # lmao symbols
+                $symbols = @(">", ">>", ">>>", "$", "#", "λ", "~>", "=>", "!!")
+                $randomSymbol = $symbols | Get-Random
+                Write-Host "{" -ForegroundColor $color2 -NoNewline
+                Write-Host $prefix -ForegroundColor $color1 -NoNewline
+                Write-Host "} " -ForegroundColor $color2 -NoNewline
+                Write-Host "$($Path)" -NoNewline
+                Write-host " $randomSymbol" -NoNewline
+            }
             return " "
         }
     }
     end {
         Write-Host "MemePrompt enabled. your terminal is now " -ForegroundColor Cyan -NoNewline
         Write-Host "cooked" -ForegroundColor Red -NoNewline
-        Write-Host ". no going back???. godspeed o7" -ForegroundColor Cyan
+        Write-Host "." -ForegroundColor Cyan
     }
 }
