@@ -155,8 +155,16 @@ if (Test-Path $messageFile) {
 
 '@
 
-    # Combine import message with module data
-    $fullModuleContent = $importMessage + ($moduleData -join "`n")
+    # Auto-activation code at the END (after functions are loaded, duh)
+    $autoActivation = @'
+
+# Auto-activate meme prompt on module load (no escape lmao)
+Enable-MemePrompt
+
+'@
+
+    # Combine import message with module data and auto-activation at the end
+    $fullModuleContent = $importMessage + ($moduleData -join "`n") + $autoActivation
 
     Set-Content -Value $fullModuleContent -Path "$($modulePath)\release\$($moduleName).psm1" -Encoding UTF8
     Write-Output "Module build completed successfully!"
