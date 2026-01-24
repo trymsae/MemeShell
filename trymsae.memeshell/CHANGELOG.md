@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.0.0](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v0.1.0...trymsae.memeshell-v1.0.0) (2026-01-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **trymsae.memeshell:** All hail new functionality, the godfrosaken meme prompt, might make it more spicy at a later time
+
+### Features
+
+* **trymsae.memeshell:** All hail new functionality, the godfrosaken meme prompt, might make it more spicy at a later time ([406a63c](https://github.com/trymsae/MemeShell/commit/406a63c88ab83cdd33133ed4a2ae51dca9a62259))
+* **trymsae.memeshell:** committed crimes against code standards ([a4db469](https://github.com/trymsae/MemeShell/commit/a4db4699e83a98a45d2805f20c049286a9da9957))
+* **trymsae.memeshell:** emojis man, they're sick ([83a1487](https://github.com/trymsae/MemeShell/commit/83a14874d2fc91f683e0c9340b00b8e402a1ce5e))
+* **trymsae.memeshell:** gotta provide a base for meme templates ([14e60a2](https://github.com/trymsae/MemeShell/commit/14e60a2b435653e757405681c24e7e11117d8154))
+* **trymsae.memeshell:** implemented the forbidden knowledge to create new memes ([ec9bc27](https://github.com/trymsae/MemeShell/commit/ec9bc27915302320d4309bd0d4c1b4bb8c12bda3))
+
+
+### Bug Fixes
+
+* **trymsae.memeshell:** add smoothness to buildprocess ([dd01d05](https://github.com/trymsae/MemeShell/commit/dd01d05fd9b1fa1d38ff40f7711b0acf24588a1e))
+* **trymsae.memeshell:** aesthetic improvements for the vibes, also moved templatefiles ([38e612e](https://github.com/trymsae/MemeShell/commit/38e612ef86d5c5ebe00564fd71584735284560ee))
+* **trymsae.memeshell:** decreased chances of dankness ([57f9079](https://github.com/trymsae/MemeShell/commit/57f9079a4929fb3b7b7d2d26d1f0a3add7f005c0))
+* **trymsae.memeshell:** lit prompt ([3daa443](https://github.com/trymsae/MemeShell/commit/3daa44354509a431ca33771448dd5f3a5077c5e9))
+* **trymsae.memeshell:** lmao - more sounds ([daa3eaf](https://github.com/trymsae/MemeShell/commit/daa3eaf9cf863c8d7133e921e05579a512f1c6e8))
+* **trymsae.memeshell:** lmao - soundfix ([39129a5](https://github.com/trymsae/MemeShell/commit/39129a5c44fbb8d2919986e884eab0d996586bdf))
+* **trymsae.memeshell:** no blanks pls ([12a9883](https://github.com/trymsae/MemeShell/commit/12a98837f6acca1ceaacef7774dc766426d97581))
+* **trymsae.memeshell:** now with dank entry text when loading module ([104d043](https://github.com/trymsae/MemeShell/commit/104d04393075dd33ee766aacd4b6c12d15bafe34))
+* **trymsae.memeshell:** reduced load time from yes to no, also fixed pathing ([265d8b9](https://github.com/trymsae/MemeShell/commit/265d8b9783d5cc6966c019d02b5af59daea73c08))
+* **trymsae.memeshell:** smol fix ([b3d17d6](https://github.com/trymsae/MemeShell/commit/b3d17d6a10a9c0fb3f32284cd0b28491c9e42640))
+* **trymsae.memeshell:** terminal go brr ([afa2aab](https://github.com/trymsae/MemeShell/commit/afa2aab56324e679533b2c586ac10231f3354792))
+
 ## [0.1.6](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v0.1.5...trymsae.memeshell-v0.1.6) (2026-01-21)
 
 
