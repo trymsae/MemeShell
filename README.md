@@ -23,7 +23,11 @@ Install-Module -Name trymsae.memeshell -Scope CurrentUser
 
 ### Manual Installation
 1. Head to the [releases](https://github.com/trymsae/MemeShell/releases) and download the newest version.
-2. Extract the content and import to your module-folder.
+2. Extract the content and import to your module-folder. 'C:\users\USERNAME\Documents\Powershell\Modules'
+3. Import module:
+```Powershell
+Import-Module -Name trymsae.memeshell
+```
 
 ## Usage
 
