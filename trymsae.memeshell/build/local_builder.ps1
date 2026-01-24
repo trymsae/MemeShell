@@ -2,6 +2,7 @@
 ## This script builds the module locally so you can test it
 
 # Get paths relative to script location
+Remove-item -Recurse -Path "$($PSScriptRoot)\..\release\trymsae.memeshell"
 $buildScriptPath = Join-Path $PSScriptRoot "build.ps1"
 $modulePath = Split-Path -Parent $PSScriptRoot
 $tempReleasePath = Join-Path $modulePath "release"

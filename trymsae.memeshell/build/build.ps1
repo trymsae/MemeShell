@@ -136,7 +136,7 @@ if ($moduleData) {
     # Add random import message loader at the beginning
     $importMessage = @'
 # MemeShell Module Load Message
-$messageFile = Join-Path $PSScriptRoot "templates\load-messages.b64"
+$messageFile = Join-Path $PSScriptRoot "templates\texts\load-messages.b64"
 if (Test-Path $messageFile) {
     try {
         $base64Content = Get-Content $messageFile -Raw
@@ -144,17 +144,27 @@ if (Test-Path $messageFile) {
         $decodedText = [System.Text.Encoding]::UTF8.GetString($bytes)
         $messages = $decodedText -split "`r?`n" | Where-Object { $_.Trim() -ne "" }
         $randomMessage = $messages | Get-Random
-        Write-Host $randomMessage -ForegroundColor Cyan
+        Write-Host "█▀▄▀█ █▀▀ █▀▄▀█ █▀▀ █▀ █░█ █▀▀ █░░ █░░    █░░ █▀█ ▄▀█ █▀▄ █▀▀ █▀▄" -ForegroundColor Magenta
+        Write-Host "█░▀░█ ██▄ █░▀░█ ██▄ ▄█ █▀█ ██▄ █▄▄ █▄▄    █▄▄ █▄█ █▀█ █▄▀ ██▄ █▄▀" -ForegroundColor Magenta
+        Write-host "$($randomMessage)"
     }
     catch {
-        Write-Host "MemeShell loaded!" -ForegroundColor Cyan
+        Write-host "Catch these hands"
     }
 }
 
 '@
 
-    # Combine import message with module data
-    $fullModuleContent = $importMessage + ($moduleData -join "`n")
+    # Auto-activation code at the END (after functions are loaded, duh)
+    $autoActivation = @'
+
+# Auto-activate meme prompt on module load (no escape lmao)
+Enable-MemePrompt
+
+'@
+
+    # Combine import message with module data and auto-activation at the end
+    $fullModuleContent = $importMessage + ($moduleData -join "`n") + $autoActivation
 
     Set-Content -Value $fullModuleContent -Path "$($modulePath)\release\$($moduleName).psm1" -Encoding UTF8
     Write-Output "Module build completed successfully!"
