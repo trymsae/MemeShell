@@ -5,6 +5,8 @@
 
 **MemeShell** is a PowerShell module that brings maximum dankness to your terminal. Generate crispy memes locally with your own templates - no APIs, no cap, just pure PowerShell chaos.
 
+<img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/9b5e11fa-8005-4810-9fa1-3dae5ca9ec97" />
+
 ## Features
 
 - **Local Meme Generation**: 130+ templates included, all stored locally (no external API calls)
