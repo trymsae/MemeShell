@@ -83,3 +83,29 @@ jobs:
         with:
           tag_name: ${{ needs.release-please.outputs.tag_name }}
           files: ${{ env.ZIP_PATH }}
+
+  publish-to-psgallery:
+    needs: [release-please, build-and-upload]
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Module
+        shell: pwsh
+        run: |
+          .\trymsae.memeshell\build\build.ps1
+
+      - name: Publish to PowerShell Gallery
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ secrets.PSGALLERYAPIKEY }}
+        run: |
+          $modulePath = ".\trymsae.memeshell\release"
+
+          Write-Host "Publishing trymsae.memeshell to PowerShell Gallery... 🚀" -ForegroundColor Cyan
+
+          Publish-Module -Path $modulePath -NuGetApiKey $env:NUGET_API_KEY -Verbose
+
+          Write-Host "Module published successfully! 🔥" -ForegroundColor Green
