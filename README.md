@@ -14,9 +14,9 @@
 - **Clipboard Integration**: Automatically copies memes to clipboard for instant sharing
 - **Classic CLI Mode**: Quick meme generation via command line parameters
 
-## Installation
+## Installation, if you're brave enough
 
-### From PowerShell Gallery (Recommended)
+### From PowerShell Gallery
 ```powershell
 Install-Module -Name trymsae.memeshell -Scope CurrentUser
 ```
@@ -25,9 +25,9 @@ Install-Module -Name trymsae.memeshell -Scope CurrentUser
 1. Head to the [releases](https://github.com/trymsae/MemeShell/releases) and download the newest version.
 2. Extract the content and import to your module-folder.
 
-## Usage 🎯
+## Usage
 
-### Quick Start (Classic Mode)
+### Quick Start - make memes on the fly
 ```powershell
 # Generate a meme with top/bottom text
 New-Meme -template "drake" -topText "Using APIs" -bottomText "Local PowerShell memes"
@@ -36,7 +36,7 @@ New-Meme -template "drake" -topText "Using APIs" -bottomText "Local PowerShell m
 meme -template "distracted-boyfriend" -topText "Me" -bottomText "MemeShell"
 ```
 
-## Development 🛠️
+## Development
 
 ### Project Structure
 ```
@@ -49,12 +49,12 @@ MemeShell/
 └── .github/workflows/     # CI/CD automation
 ```
 
-### CI/CD Pipeline
+### CI/CD Pipeline - pipeline straight to ur mom
 - **Release Please**: Automated semantic versioning
 - **GitHub Actions**: Automated builds on releases
 - **PSGallery Publishing**: Auto-publish to PowerShell Gallery on new releases
 
-## Contributing 🤝
+## Contributing
 
 ### Commit Syntax
 This project uses semantic versioning via release-please. Format commits like:
@@ -65,4 +65,4 @@ fix(trymsae.memeshell): resolve encoding issue
 feat(trymsae.memeshell)!: remove deprecated function
 ```
 
-*Built with PowerShell, memes, and no regard for industry best practices* 💀
+*Built with PowerShell, with an unhinged love for memes* 
