@@ -4,7 +4,7 @@
       "release-type": "simple",
       "package-name": "trymsae.memeshell",
       "pull-request-title-pattern": "🍺 chore: release ${component} ${version}",
-      "pull-request-header": "It's happening! Release ${version} is ready to ship.",
+      "pull-request-header": "lmaooo, new release.",
       "pull-request-footer": "---\n\nMerge this PR to trigger the release and build pipeline.",
       "include-v-in-tag": true,
       "changelog-sections": [
