@@ -38,8 +38,8 @@ Import-Module -Name trymsae.memeshell
 # Generate a meme with top/bottom text
 New-Meme -template "drake" -topText "Using APIs" -bottomText "Local PowerShell memes"
 
-# Or use the alias
-meme -template "distracted-boyfriend" -topText "Me" -bottomText "MemeShell"
+# I recommend using the -manual switch to get a local meme editor.
+New-Meme -template "bernie" -manual
 ```
 
 ## Development
