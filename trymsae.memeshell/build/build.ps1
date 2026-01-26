@@ -64,8 +64,9 @@ else {
 ## Define module manifest parameters
 $moduleGuid = "c861dd56-5800-46a7-a296-07a46989e530"
 $moduleAuthor = "trymsae"
+$moduleCompany = "Knekt & Brekt AS"
 $moduleDescription = "MemeShell PowerShell Module"
-$modulePowerShellVersion = "5.1"
+$modulePowerShellVersion = "7.5"
 $moduleTags = @("Meme", "Shell")
 $moduleProjectUri = "https://github.com/trymsae/MemeShell"
 $moduleLicenseUri = "https://github.com/trymsae/MemeShell/blob/main/LICENSE"
@@ -80,6 +81,7 @@ $moduleManifestParams = @{
     ModuleVersion = $moduleVersion
     GUID = $moduleGuid
     Author = $moduleAuthor
+    companyName = $moduleCompany
     Description = $moduleDescription
     PowerShellVersion = $modulePowerShellVersion
     FunctionsToExport = $functoexport
