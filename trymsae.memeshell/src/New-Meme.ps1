@@ -484,7 +484,7 @@ function New-Meme {
             $buttonGenerate = New-Object System.Windows.Forms.Button
             $buttonGenerate.Location = New-Object System.Drawing.Point 10, $buttonY
             $buttonGenerate.Size = New-Object System.Drawing.Size 740, 40
-            $buttonGenerate.Text = "Generate Meme (no cap) 🔥"
+            $buttonGenerate.Text = "Generate Meme"
             $buttonGenerate.Font = New-Object System.Drawing.Font("Arial", 11, [System.Drawing.FontStyle]::Bold)
             $buttonGenerate.Add_Click({
                 $script:manualTemplate = $comboTemplate.SelectedItem
