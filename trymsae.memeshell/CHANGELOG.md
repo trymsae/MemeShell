@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.0...trymsae.memeshell-v1.0.1) (2026-01-26)
+
+
+### Bug Fixes
+
+* **trymsae.memeshell:** lmao, 5.1 oldie ([20e25af](https://github.com/trymsae/MemeShell/commit/20e25af83a47818037b6cc8af62d74984d83c133))
+
 ## [1.0.0](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v0.1.0...trymsae.memeshell-v1.0.0) (2026-01-24)
 
 
