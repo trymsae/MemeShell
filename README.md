@@ -66,8 +66,8 @@ MemeShell/
 This project uses semantic versioning via release-please. Format commits like:
 
 ```
-feat(trymsae.memeshell): add new meme template
 fix(trymsae.memeshell): resolve encoding issue
+feat(trymsae.memeshell): add new meme template
 feat(trymsae.memeshell)!: remove deprecated function
 ```
 
