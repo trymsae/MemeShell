@@ -59,7 +59,7 @@ function Enable-MemePrompt {
             $color1 = $script:MemeColors | Get-Random
             $color2 = $script:MemeColors | Get-Random
             $Path = (Get-Location).Path
-            $Path = $Path -replace "C:\\Users\\$($env:USERNAME)\\", "~\"
+            $Path = $Path -replace [regex]::Escape($env:USERPROFILE + "\"), "~\"
             # lmao
             if ((Get-Random -Minimum 1 -Maximum 35) -eq 1) {
                 try {
