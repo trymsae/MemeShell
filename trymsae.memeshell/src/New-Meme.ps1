@@ -14,9 +14,14 @@ function New-Meme {
             Opens GUI window for manual meme creation (more control, less speed)
         .PARAMETER noClipboard
             Don't copy the result to clipboard (just save it)
+        .PARAMETER textCase
+            Text casing: Upper (default, classic meme), Lower, or Original (keep as typed)
         .EXAMPLE
             PS > New-Meme -template "drake" -topText "Using APIs" -bottomText "Local images with PowerShell"
             Meme created and mogged to clipboard
+        .EXAMPLE
+            PS > New-Meme -template "drake" -topText "Shouting" -bottomText "whispering" -textCase Original
+            Renders with exact casing as typed
         .EXAMPLE
             PS > meme -manual
             Opens GUI for manual meme crafting
@@ -46,6 +51,9 @@ function New-Meme {
         [parameter(Position = 4, Mandatory = $false)]
         [switch]$noClipboard,
         [parameter(Position = 5, Mandatory = $false)]
+        [ValidateSet('Upper', 'Lower', 'Original')]
+        [string]$textCase = 'Original',
+        [parameter(Position = 6, Mandatory = $false)]
         [ValidateRange(2, 6)]
         [int]$TextLines = 2
     )
@@ -264,15 +272,19 @@ function New-Meme {
 
                         if ([string]::IsNullOrWhiteSpace($text)) { return }
 
-                        $upperText = $text.ToUpper()
+                        $formattedText = switch ($textCase) {
+                            'Lower'    { $text.ToLower() }
+                            'Original' { $text }
+                            default    { $text.ToUpper() }
+                        }
 
                         # Check if wrapping is needed
-                        $textWidth = $previewGraphics.MeasureString($upperText, $previewFont).Width
+                        $textWidth = $previewGraphics.MeasureString($formattedText, $previewFont).Width
                         $maxWidth = $previewImage.Width * 0.9  # Leave 10% margin
 
                         if ($enableWrap -and $textWidth -gt $maxWidth) {
                             # Split text into words and wrap (the wrapping sauce)
-                            $words = $upperText -split ' '
+                            $words = $formattedText -split ' '
                             $lines = @()
                             $currentLine = ""
 
@@ -328,7 +340,7 @@ function New-Meme {
 
                             $path = New-Object System.Drawing.Drawing2D.GraphicsPath
                             $path.AddString(
-                                $upperText,
+                                $formattedText,
                                 $previewFont.FontFamily,
                                 [int]$previewFont.Style,
                                 $previewFontSize,
@@ -618,15 +630,19 @@ function New-Meme {
 
                 if ([string]::IsNullOrWhiteSpace($text)) { return }
 
-                $upperText = $text.ToUpper()
+                $formattedText = switch ($textCase) {
+                    'Lower'    { $text.ToLower() }
+                    'Original' { $text }
+                    default    { $text.ToUpper() }
+                }
 
                 # Check if wrapping is needed
-                $textWidth = $graphics.MeasureString($upperText, $font).Width
+                $textWidth = $graphics.MeasureString($formattedText, $font).Width
                 $maxWidth = $image.Width * 0.9  # Leave 10% margin
 
                 if ($enableWrap -and $textWidth -gt $maxWidth) {
                     # Split text into words and wrap (wrapping goes hard fr)
-                    $words = $upperText -split ' '
+                    $words = $formattedText -split ' '
                     $lines = @()
                     $currentLine = ""
 
@@ -679,7 +695,7 @@ function New-Meme {
 
                     $path = New-Object System.Drawing.Drawing2D.GraphicsPath
                     $path.AddString(
-                        $upperText,
+                        $formattedText,
                         $font.FontFamily,
                         [int]$font.Style,
                         $fontSize,
