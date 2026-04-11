@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.2...trymsae.memeshell-v1.0.3) (2026-04-11)
+
+
+### Bug Fixes
+
+* **trymsae.memeshell:** do you even lint? ([5790228](https://github.com/trymsae/MemeShell/commit/57902283c16e7943cac4766d89608fe7274222ca))
+* **trymsae.memeshell:** New-Meme, now supports original text-casing, so now you can combine with the 'mock' function ([555230c](https://github.com/trymsae/MemeShell/commit/555230ca367258f9f2ba97011cccd0cd7abe6202))
+
 ## [1.0.2](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.1...trymsae.memeshell-v1.0.2) (2026-04-11)
 
 
