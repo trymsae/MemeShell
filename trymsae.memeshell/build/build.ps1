@@ -30,11 +30,11 @@ $files = Get-ChildItem -Path "$($modulePath)\src\" -Filter "*.ps1" -ErrorAction 
 if ($files) {
     $functiondata = Foreach ($file in $files) {
         $content = Get-Content -Path $file.FullName
-        $content | where { $_ -match "^function\s{1}" }
+        $content | Where-Object { $_ -match "^function\s{1}" }
     }
     $aliasData = Foreach ($file in $files) {
         $content = Get-Content -Path $file.FullName
-        $content | where { $_ -match "\[Alias\(" -and $_ -notmatch "^#|#\[Alias\(" }
+        $content | Where-Object { $_ -match "\[Alias\(" -and $_ -notmatch "^#|#\[Alias\(" }
     }
     $moduleData = Foreach ($file in $files) {
         Get-Content -Path $file.FullName
@@ -66,7 +66,7 @@ $moduleGuid = "c861dd56-5800-46a7-a296-07a46989e530"
 $moduleAuthor = "trymsae"
 $moduleCompany = "Knekt & Brekt AS"
 $moduleDescription = "MemeShell PowerShell Module"
-$modulePowerShellVersion = "7.5"
+$modulePowerShellVersion = "7.4"
 $moduleTags = @("Meme", "Shell")
 $moduleProjectUri = "https://github.com/trymsae/MemeShell"
 $moduleLicenseUri = "https://github.com/trymsae/MemeShell/blob/main/LICENSE"
