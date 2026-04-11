@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.1...trymsae.memeshell-v1.0.2) (2026-04-11)
+
+
+### Bug Fixes
+
+* **trymsae.memeshell:** New-Meme, redemption arc for this function ([284589a](https://github.com/trymsae/MemeShell/commit/284589ac8eb2db39c1e1fd9316a01ef974b6c87c))
+* **trymsae.memeshell:** unleash the spongebobs ([5e20a1c](https://github.com/trymsae/MemeShell/commit/5e20a1c76bb0abdabdc227974f6530d207422824))
+
 ## [1.0.1](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.0...trymsae.memeshell-v1.0.1) (2026-01-26)
 
 
