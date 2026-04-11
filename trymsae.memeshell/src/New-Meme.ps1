@@ -25,6 +25,17 @@ function New-Meme {
     [CmdletBinding()]
     param (
         [parameter(Position = 0, Mandatory = $false)]
+        [ArgumentCompleter({
+            param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+            $modulePath = (Get-Module -Name 'trymsae.memeshell' -ErrorAction SilentlyContinue).ModuleBase
+            if (-not $modulePath) { return }
+            $picturesPath = Join-Path $modulePath "templates\pictures"
+            if (Test-Path $picturesPath) {
+                Get-ChildItem $picturesPath -Include *.jpg,*.jpeg,*.png,*.bmp -Recurse -ErrorAction SilentlyContinue |
+                    Where-Object { $_.BaseName -like "$wordToComplete*" } |
+                    ForEach-Object { $_.BaseName }
+            }
+        })]
         [string]$template,
         [parameter(Position = 1, Mandatory = $false)]
         [string]$topText,
@@ -42,6 +53,8 @@ function New-Meme {
         # Load the juice (System.Drawing for image manipulation)
         Add-Type -AssemblyName System.Drawing
         Add-Type -AssemblyName System.Windows.Forms
+
+        $script:newMemeInitOk = $false
 
         # get templates folder
         $picturesPath = Join-Path $PSScriptRoot "templates\pictures"
@@ -62,8 +75,15 @@ function New-Meme {
         # temp output path
         $tempPath = [System.IO.Path]::GetTempPath()
         $outputFile = Join-Path $tempPath "meme_$(Get-Date -Format 'yyyyMMdd_HHmmss').png"
+
+        $script:newMemeInitOk = $true
     }
     process {
+        # bail if begin failed (return in begin doesn't stop process, no cap)
+        if (-not $script:newMemeInitOk) { return }
+
+        $useMultiLineMode = $false
+
         # Manual mode (GUI goes hard)
         if ($manual) {
             # Calculate form height based on text lines (dynamic sizing fr fr)
@@ -96,7 +116,9 @@ function New-Meme {
                 $comboTemplate.Items.Add($tmpl.BaseName) | Out-Null
             }
             if ($comboTemplate.Items.Count -gt 0) {
-                $comboTemplate.SelectedIndex = 0
+                # Pre-select the template passed via -template, otherwise fall back to first (no more always-bernie bug)
+                $preSelectedIdx = $comboTemplate.Items.IndexOf($template)
+                $comboTemplate.SelectedIndex = if ($preSelectedIdx -ge 0) { $preSelectedIdx } else { 0 }
             }
             $form.Controls.Add($comboTemplate)
 
@@ -401,7 +423,6 @@ function New-Meme {
                     return  # Click outside image
                 }
 
-                $imageX = [int](($clickEvent.X - $displayX) / $displayWidth * $pictureBox.Image.Width)
                 $imageY = [int](($clickEvent.Y - $displayY) / $displayHeight * $pictureBox.Image.Height)
 
                 # Check if clicking near any text line (50px tolerance, find closest)
@@ -427,6 +448,11 @@ function New-Meme {
                     $script:dragTargetIndex = $closestIndex
                     $script:lastMouseY = $imageY
                     $pictureBox.Cursor = [System.Windows.Forms.Cursors]::SizeAll
+
+                    # If X is centered (-1), unlock it to the actual center pixel so dragging works immediately (no more 1px workaround)
+                    if ($numericXControls[$closestIndex].Value -eq -1) {
+                        $numericXControls[$closestIndex].Value = [int]($pictureBox.Image.Width / 2)
+                    }
                 }
             })
 
@@ -694,7 +720,8 @@ function New-Meme {
                 # Classic mode with just top/bottom text (backward compatibility with wrapping enabled)
                 if (-not [string]::IsNullOrWhiteSpace($topText)) {
                     # Use custom Y position if provided (from manual mode), otherwise default
-                    if ($topTextY) {
+                    # NOTE: use $null -ne check, not if ($topTextY), because 0 is falsy fr fr
+                    if ($null -ne $topTextY) {
                         $topY = $topTextY
                     }
                     else {
@@ -705,7 +732,8 @@ function New-Meme {
 
                 if (-not [string]::IsNullOrWhiteSpace($bottomText)) {
                     # Use custom Y position if provided (from manual mode), otherwise default
-                    if ($bottomTextY) {
+                    # NOTE: use $null -ne check, not if ($bottomTextY), because 0 is falsy fr fr
+                    if ($null -ne $bottomTextY) {
                         $bottomY = $bottomTextY
                     }
                     else {
@@ -732,6 +760,7 @@ function New-Meme {
         }
     }
     end {
+        if (-not $script:newMemeInitOk) { return }
         if (Test-Path $outputFile) {
             # Copy to clipboard (based)
             if (-not $noClipboard) {
