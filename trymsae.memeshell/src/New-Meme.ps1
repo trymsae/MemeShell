@@ -34,12 +34,9 @@ function New-Meme {
             param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
             $modulePath = (Get-Module -Name 'trymsae.memeshell' -ErrorAction SilentlyContinue).ModuleBase
             if (-not $modulePath) { return }
-            $picturesPath = Join-Path $modulePath "templates\pictures"
-            if (Test-Path $picturesPath) {
-                Get-ChildItem $picturesPath -Include *.jpg,*.jpeg,*.png,*.bmp -Recurse -ErrorAction SilentlyContinue |
-                    Where-Object { $_.BaseName -like "$wordToComplete*" } |
-                    ForEach-Object { $_.BaseName }
-            }
+            Get-MemeTemplatePaths -modulePath $modulePath |
+                Where-Object { $_.BaseName -like "$wordToComplete*" } |
+                ForEach-Object { $_.BaseName }
         })]
         [string]$template,
         [parameter(Position = 1, Mandatory = $false)]
@@ -64,19 +61,12 @@ function New-Meme {
 
         $script:newMemeInitOk = $false
 
-        # get templates folder
-        $picturesPath = Join-Path $PSScriptRoot "templates\pictures"
-
-        if (-not (Test-Path $picturesPath)) {
-            Write-Error "Templates folder not found at: $picturesPath (no bitches?)"
-            return
-        }
-
-        # grab all image files
-        $availableTemplates = Get-ChildItem $picturesPath -Include *.jpg,*.jpeg,*.png,*.bmp -Recurse -ErrorAction SilentlyContinue
+        # grab all image files from module and user-local templates (fr fr)
+        # Note: $PSScriptRoot = release/ dir when installed, src/ when dot-sourced in dev (module templates won't load in dev, user-local still works)
+        $availableTemplates = Get-MemeTemplatePaths -modulePath $PSScriptRoot
 
         if ($availableTemplates.Count -eq 0) {
-            Write-Error "No templates found in $picturesPath (folder is empty fr)"
+            Write-Error "No templates found fr — check module install and ~/.memeshell/templates/pictures/"
             return
         }
 
