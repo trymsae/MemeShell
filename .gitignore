@@ -1,2 +1,5 @@
 # Build outputs
 trymsae.memeshell/release/
+
+# Tests
+trymsae.memeshell/tests/
