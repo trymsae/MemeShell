@@ -3,18 +3,17 @@
 
 # MemeShell 🗿
 
-**MemeShell** is a PowerShell module that brings maximum dankness to your terminal. Generate crispy memes locally with your own templates - no APIs, no cap, just pure PowerShell chaos.
+PowerShell module for generating memes in your terminal. 130+ templates, runs fully local, no APIs involved.
 
-<img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/9b5e11fa-8005-4810-9fa1-3dae5ca9ec97" />
+<img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/9b5e11fa-8005-4810-9fa1-3dae5dc7ea96" />
 
-## Features
+## What you get
 
-- **Local Meme Generation**: 130+ templates included, all stored locally (no external API calls)
-- **Multi-Line Text Support**: Add 2-6 text lines per meme with full control
-- **GUI Manual Mode**: Interactive editor with live preview
-- **X/Y Position Controls**: Precise text placement with drag-and-drop support
-- **Clipboard Integration**: Automatically copies memes to clipboard for instant sharing
-- **Classic CLI Mode**: Quick meme generation via command line parameters
+- 130+ bundled templates, all local — no rate limits, no API keys, no cap
+- `New-Meme` auto-copies to clipboard on generation so you can paste immediately
+- `New-Meme -manual` switch opens a GUI editor with live preview and drag-and-drop text positioning
+- `Import-Meme` to add your own templates from a local file or a URL
+- User templates live in `~/.memeshell/` so they survive module updates
 
 ## Installation, if you're brave enough
 
@@ -24,22 +23,27 @@ Install-Module -Name trymsae.memeshell -Scope CurrentUser
 ```
 
 ### Manual Installation
-1. Head to the [releases](https://github.com/trymsae/MemeShell/releases) and download the newest version.
-2. Extract the content and import to your module-folder. 'C:\users\USERNAME\Documents\Powershell\Modules'
-3. Import module:
-```Powershell
+1. Head to the [releases](https://github.com/trymsae/MemeShell/releases) and grab the newest version
+2. Extract and drop it into `C:\Users\USERNAME\Documents\PowerShell\Modules`
+3. Import it:
+```powershell
 Import-Module -Name trymsae.memeshell
 ```
 
 ## Usage
 
-### Quick Start - make memes on the fly
 ```powershell
-# Generate a meme with top/bottom text
+# quick meme from the command line
 New-Meme -template "drake" -topText "Using APIs" -bottomText "Local PowerShell memes"
 
-# I recommend using the -manual switch to get a local meme editor.
+# open the GUI editor (recommended)
 New-Meme -template "bernie" -manual
+
+# import a template from a file
+Import-Meme -path "C:\memes\my-template.png"
+
+# import a template straight from a URL
+Import-Meme -path "https://example.com/distracted-boyfriend.jpg"
 ```
 
 ## Development
@@ -56,14 +60,14 @@ MemeShell/
 ```
 
 ### CI/CD Pipeline - pipeline straight to ur mom
-- **Release Please**: Automated semantic versioning
-- **GitHub Actions**: Automated builds on releases
-- **PSGallery Publishing**: Auto-publish to PowerShell Gallery on new releases
+- **Release Please**: automated semantic versioning
+- **GitHub Actions**: builds on release
+- **PSGallery Publishing**: auto-publishes on new releases
 
 ## Contributing
 
 ### Commit Syntax
-This project uses semantic versioning via release-please. Format commits like:
+Uses release-please for semantic versioning:
 
 ```
 fix(trymsae.memeshell): resolve encoding issue
@@ -71,4 +75,4 @@ feat(trymsae.memeshell): add new meme template
 feat(trymsae.memeshell)!: remove deprecated function
 ```
 
-*Built with PowerShell, with an unhinged love for memes* 
+*Built with PowerShell, with an unhinged love for memes*
