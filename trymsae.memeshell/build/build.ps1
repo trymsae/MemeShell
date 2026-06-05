@@ -157,13 +157,8 @@ if (Test-Path $messageFile) {
 
 '@
 
-    # Auto-activation code at the END (after functions are loaded, duh)
-    $autoActivation = @'
-
-# Auto-activate meme prompt on module load (no escape lmao)
-Enable-MemePrompt
-
-'@
+    # Auto-activation disabled — swap "" for a here-string to re-enable
+    $autoActivation = ""
 
     # Combine import message with module data and auto-activation at the end
     $fullModuleContent = $importMessage + ($moduleData -join "`n") + $autoActivation
