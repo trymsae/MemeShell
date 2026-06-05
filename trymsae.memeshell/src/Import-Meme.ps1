@@ -94,7 +94,7 @@ function Import-Meme {
 
             # Validate format
             if ($sourceFile.Extension.ToLower() -notin $supportedExtensions) {
-                Write-Error "Unsupported format: '$($sourceFile.Extension)'. Valid formats: jpg, jpeg, png, bmp (no bitches format)"
+                Write-Error "Unsupported format: '$($sourceFile.Extension)'. Valid formats: jpg, jpeg, png, bmp (no bitch format)"
                 return
             }
 
@@ -130,10 +130,21 @@ function Import-Meme {
 
         $destPath = Join-Path $destDir $outputName
 
-        # Check for filename collision
-        if (Test-Path $destPath) {
-            Write-Error "Template '$outputName' already exists at $destDir — use -name to pick a different name (ratio + L)"
-            return
+        # Check for filename collision — prompt for a new name rather than hard-erroring
+        while (Test-Path $destPath) {
+            $newName = Read-Host "Template '$outputName' already exists — what do you want to call it? (empty to cancel)"
+            if ([string]::IsNullOrWhiteSpace($newName)) {
+                Write-Error "Import cancelled — '$outputName' already exists (ratio + L)"
+                return
+            }
+            $kebabName  = $newName.ToLower() -replace '[\s_]+', '-' -replace '[^a-z0-9\-]', '' -replace '-+', '-'
+            $kebabName  = $kebabName.Trim('-')
+            if ([string]::IsNullOrWhiteSpace($kebabName)) {
+                Write-Error "Could not derive a valid filename from '$newName' (skill issue fr)"
+                return
+            }
+            $outputName = "$kebabName.png"
+            $destPath   = Join-Path $destDir $outputName
         }
 
         # Load, optionally resize, save as PNG
