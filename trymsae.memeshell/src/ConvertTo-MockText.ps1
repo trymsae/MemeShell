@@ -19,7 +19,7 @@ function ConvertTo-MockText {
             PS > git log --oneline | Select-Object -First 5 | mock
             mocks your entire commit history, as it deserves
     #>
-    [alias('mock')]
+    [alias('mocktext')]
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipeline = $true)]
