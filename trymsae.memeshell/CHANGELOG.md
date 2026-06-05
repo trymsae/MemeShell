@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.1.0](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.3...trymsae.memeshell-v1.1.0) (2026-06-05)
+
+
+### Features
+
+* **import-meme:** add HTTP/HTTPS URL support to -path parameter ([3b323eb](https://github.com/trymsae/MemeShell/commit/3b323eb1defd4dd2e2447832c74d0d002fa92b67))
+* **import-meme:** prompt for new name on filename collision ([209b0f8](https://github.com/trymsae/MemeShell/commit/209b0f87f9380c90672f83adeab2d712b9a79377))
+* **memeshell:** add Get-MemeTemplatePaths helper to merge module and user-local templates ([e92e3d0](https://github.com/trymsae/MemeShell/commit/e92e3d0a7ed1ffdde7139934af4cf3f41ab620f7))
+* **new-meme:** serve templates from both module and user-local folder ([490a38e](https://github.com/trymsae/MemeShell/commit/490a38e016ef946bc1e85d726d1e28333f87ef9f))
+* **templates:** add mocking-spongebob template ([4379542](https://github.com/trymsae/MemeShell/commit/437954246d5802ca1b722620fd19c5ca57395e29))
+
+
+### Bug Fixes
+
+* **trymsae.memeshell:** added the secret sauce ([21aca96](https://github.com/trymsae/MemeShell/commit/21aca964eec93a73f3afbfd7a9e9e7736616d9d4))
+* **trymsae.memeshell:** changed alias, to not fuck with pester ([24f4c06](https://github.com/trymsae/MemeShell/commit/24f4c0672547bbe391a316ad9b6f97967d6e5255))
+
+
+### Miscellaneous
+
+* **build:** disable Enable-MemePrompt auto-activation on module load ([9517c59](https://github.com/trymsae/MemeShell/commit/9517c59df53d5f00f436bf3ad6dd89dceb686e1d))
+* remove local_builder.ps1 and add tests folder to gitignore ([f50273f](https://github.com/trymsae/MemeShell/commit/f50273f020bbaf3063800e8751869cfdfba5fa2c))
+
 ## [1.0.3](https://github.com/trymsae/MemeShell/compare/trymsae.memeshell-v1.0.2...trymsae.memeshell-v1.0.3) (2026-04-11)
 
 
