@@ -2,10 +2,15 @@
 ![Release Please](https://github.com/trymsae/MemeShell/actions/workflows/release-please.yaml/badge.svg)
 
 # MemeShell 🗿
+PowerShell module for generating memes in your terminal. 130+ templates, runs fully local at around ~10mb\
+<img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/70126029-c473-4273-8aac-dddb47ef4cdf" />
+<p align="center" width="100%">
+  <video src="https://github.com/user-attachments/assets/1316a23a-8920-4a48-925f-c49d167c8019" width="80%" controls></video>
+</p>
+<p align="center" width="100%">
+  <video src="https://github.com/user-attachments/assets/3736219a-7a96-4294-83d5-66e7f3da37f3" width="80%" controls></video>
+</p>
 
-PowerShell module for generating memes in your terminal. 130+ templates, runs fully local, no APIs involved.
-
-<img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/9b5e11fa-8005-4810-9fa1-3dae5dc7ea96" />
 
 ## What you get
 
@@ -43,7 +48,7 @@ New-Meme -template "bernie" -manual
 Import-Meme -path "C:\memes\my-template.png"
 
 # import a template straight from a URL
-Import-Meme -path "https://example.com/distracted-boyfriend.jpg"
+Import-Meme -path "https://imgflip.com/s/meme/Futurama-Fry.jpg"
 ```
 
 ## Development
