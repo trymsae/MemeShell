@@ -7,12 +7,12 @@ PowerShell module for generating memes in your terminal. 130+ templates, runs fu
 <details>
   <summary>New-Meme</summary>
   <br>
-  <img width="1280" height="640" alt="new_meme" src="https://github.com/user-attachments/assets/fcdf1d5b-d124-482e-b97f-998d9bc97a47" />
+  <img width="1280" height="640" alt="new_meme" src="https://github.com/user-attachments/assets/b3c54707-f641-4d04-a142-0db47e9f4c6a" />
 </details>
 <details>
   <summary>Import-Meme</summary>
   <br>
-  <img width="1280" height="640" alt="import_meme" src="https://github.com/user-attachments/assets/4300b98b-bccd-44e5-9ba3-a26c3b4c7c69" />
+  <img <img width="1280" height="640" alt="import_meme" src="https://github.com/user-attachments/assets/d73bdb0f-1ea5-460d-9d7c-4ec6268b6f5f" />
 </details>
 
 ## What you get
