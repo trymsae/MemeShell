@@ -4,13 +4,16 @@
 # MemeShell 🗿
 PowerShell module for generating memes in your terminal. 130+ templates, runs fully local at around ~10mb\
 <img width="1280" height="640" alt="memeshell" src="https://github.com/user-attachments/assets/70126029-c473-4273-8aac-dddb47ef4cdf" />
-<p align="center" width="100%">
-  <video src="https://github.com/user-attachments/assets/1316a23a-8920-4a48-925f-c49d167c8019" width="80%" controls></video>
-</p>
-<p align="center" width="100%">
-  <video src="https://github.com/user-attachments/assets/3736219a-7a96-4294-83d5-66e7f3da37f3" width="80%" controls></video>
-</p>
-
+<details>
+  <summary>New-Meme</summary>
+  <br>
+  <img width="1280" height="640" alt="new_meme" src="https://github.com/user-attachments/assets/fcdf1d5b-d124-482e-b97f-998d9bc97a47" />
+</details>
+<details>
+  <summary>Import-Meme</summary>
+  <br>
+  <img width="1280" height="640" alt="import_meme" src="https://github.com/user-attachments/assets/4300b98b-bccd-44e5-9ba3-a26c3b4c7c69" />
+</details>
 
 ## What you get
 
