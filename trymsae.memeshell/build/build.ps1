@@ -157,8 +157,15 @@ if (Test-Path $messageFile) {
 
 '@
 
-    # Auto-activation disabled — swap "" for a here-string to re-enable
-    $autoActivation = ""
+    # Auto-activation: registers Tab preview hook at module import (fr fr)
+    $autoActivation = @'
+
+# Tab preview hook — wired at module load, cleaned up on Remove-Module
+Register-MemeTabHook
+$MyInvocation.MyCommand.Module.OnRemove = {
+    Unregister-MemeTabHook
+}
+'@
 
     # Combine import message with module data and auto-activation at the end
     $fullModuleContent = $importMessage + ($moduleData -join "`n") + $autoActivation
