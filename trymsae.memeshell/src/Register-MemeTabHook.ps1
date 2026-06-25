@@ -1,9 +1,11 @@
 function Register-MemeTabHook {
     <#
         .SYNOPSIS
-            Registers PSReadLine Tab hook for inline meme template previews.
+            Registers PSReadLine Tab and Enter hooks for inline meme template previews.
             Called automatically at module import. Use Unregister-MemeTabHook to undo.
     #>
+
+    $script:MemePreviewVisible = $false
 
     # Save original Tab binding so we can restore it on Remove-Module
     $existing = Get-PSReadLineKeyHandler | Where-Object { $_.Key -eq 'Tab' } | Select-Object -First 1
@@ -16,6 +18,33 @@ function Register-MemeTabHook {
     }
     else {
         $script:MemeShellOriginalTabFunction = 'TabCompleteNext'
+    }
+
+    # Save original Enter binding
+    $existingEnter = Get-PSReadLineKeyHandler | Where-Object { $_.Key -eq 'Enter' } | Select-Object -First 1
+    if ($existingEnter -and $existingEnter.Function -ne 'Custom ScriptBlock') {
+        $script:MemeShellOriginalEnterFunction = $existingEnter.Function
+    }
+    else {
+        $script:MemeShellOriginalEnterFunction = 'AcceptLine'
+    }
+
+    # Enter key: clear preview then accept the line
+    Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
+        if ($script:MemePreviewVisible) {
+            try {
+                $savedTop  = [Console]::CursorTop
+                $savedLeft = [Console]::CursorLeft
+                for ($i = 0; $i -lt 15; $i++) {
+                    [Console]::SetCursorPosition(0, $savedTop + 1 + $i)
+                    [Console]::Write("`e[2K")
+                }
+                [Console]::SetCursorPosition($savedLeft, $savedTop)
+            }
+            catch { }
+            $script:MemePreviewVisible = $false
+        }
+        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 
     Set-PSReadLineKeyHandler -Key Tab -ScriptBlock {
@@ -89,6 +118,7 @@ function Register-MemeTabHook {
             $savedLeft = [Console]::CursorLeft
 
             # Erase each preview row individually to avoid scroll
+            $script:MemePreviewVisible = $false
             for ($i = 0; $i -lt $previewRowCount; $i++) {
                 [Console]::SetCursorPosition(0, $savedTop + 1 + $i)
                 [Console]::Write("`e[2K")
@@ -101,6 +131,7 @@ function Register-MemeTabHook {
 
             # Restore cursor to the input line
             [Console]::SetCursorPosition($savedLeft, $savedTop)
+            $script:MemePreviewVisible = $true
         }
         catch { }
     }
@@ -109,11 +140,17 @@ function Register-MemeTabHook {
 function Unregister-MemeTabHook {
     <#
         .SYNOPSIS
-            Restores the original PSReadLine Tab binding. Called by module OnRemove.
+            Restores the original PSReadLine Tab and Enter bindings. Called by module OnRemove.
     #>
     if ($script:MemeShellOriginalTabFunction) {
         try {
             Set-PSReadLineKeyHandler -Key Tab -Function $script:MemeShellOriginalTabFunction
+        }
+        catch { }
+    }
+    if ($script:MemeShellOriginalEnterFunction) {
+        try {
+            Set-PSReadLineKeyHandler -Key Enter -Function $script:MemeShellOriginalEnterFunction
         }
         catch { }
     }
