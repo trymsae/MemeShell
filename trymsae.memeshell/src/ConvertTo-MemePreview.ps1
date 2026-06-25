@@ -31,17 +31,20 @@ function ConvertTo-MemePreview {
 
         $sb = [System.Text.StringBuilder]::new()
 
-        for ($row = 0; $row -lt $targetHeight; $row += 2) {
-            for ($col = 0; $col -lt $targetWidth; $col++) {
-                $top = $resized.GetPixel($col, $row)
-                $bot = if (($row + 1) -lt $targetHeight) { $resized.GetPixel($col, $row + 1) } else { $top }
-                # foreground = bottom pixel (lower half of ▄), background = top pixel
-                [void]$sb.Append("`e[38;2;$($bot.R);$($bot.G);$($bot.B)m`e[48;2;$($top.R);$($top.G);$($top.B)m▄")
+        try {
+            for ($row = 0; $row -lt $targetHeight; $row += 2) {
+                for ($col = 0; $col -lt $targetWidth; $col++) {
+                    $top = $resized.GetPixel($col, $row)
+                    $bot = if (($row + 1) -lt $targetHeight) { $resized.GetPixel($col, $row + 1) } else { $top }
+                    # foreground = bottom pixel (lower half of ▄), background = top pixel
+                    [void]$sb.Append("`e[38;2;$($bot.R);$($bot.G);$($bot.B)m`e[48;2;$($top.R);$($top.G);$($top.B)m▄")
+                }
+                [void]$sb.Append("`e[0m`n")
             }
-            [void]$sb.Append("`e[0m`n")
         }
-
-        $resized.Dispose()
+        finally {
+            $resized.Dispose()
+        }
         $result = $sb.ToString()
 
         if ($OutputPath) {
