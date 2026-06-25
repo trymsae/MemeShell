@@ -162,7 +162,7 @@ if (Test-Path $messageFile) {
 
 # Tab preview hook — wired at module load, cleaned up on Remove-Module
 Register-MemeTabHook
-$MyInvocation.MyCommand.Module.OnRemove = {
+$ExecutionContext.SessionState.Module.OnRemove = {
     Unregister-MemeTabHook
 }
 '@
