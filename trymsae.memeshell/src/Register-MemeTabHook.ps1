@@ -27,11 +27,14 @@ function Register-MemeTabHook {
         [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
 
         # Step 3: bail if this isn't a meme/New-Meme command
+        if ([string]::IsNullOrWhiteSpace($line)) { return }
         $tokens      = ($line.Trim() -split '\s+')
         $commandName = $tokens[0]
         if ($commandName -notin @('meme', 'New-Meme')) { return }
 
         # Step 4: extract template name — last non-flag token after the command
+        # Note: heuristic fails for positional args after flags (e.g. meme drake -topText hi)
+        # In that case no preview shows — cosmetic miss, not a crash
         $templateName = $null
         for ($i = $tokens.Length - 1; $i -ge 1; $i--) {
             $t = $tokens[$i]
