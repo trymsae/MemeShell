@@ -1,4 +1,5 @@
 ![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/trymsae.memeshell)
+![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/trymsae.Memeshell)
 ![Release Please](https://github.com/trymsae/MemeShell/actions/workflows/release-please.yaml/badge.svg)
 
 # MemeShell 🗿
